@@ -11,7 +11,11 @@
 
     <artifactId>gmall-pms</artifactId>
     <dependencies>
-
+        <dependency>
+            <groupId>com.atguigu.gmall</groupId>
+            <artifactId>gmall-pms-interface</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!--引入公共远程调用的接口模块-->
         <dependency>
             <groupId>com.atguigu.gmall</groupId>
@@ -23,6 +27,11 @@
             <groupId>com.atguigu.gmall</groupId>
             <artifactId>gmall-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <!--引入rabbitmq-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
         <!--引入alibaba-seata-->
         <dependency>

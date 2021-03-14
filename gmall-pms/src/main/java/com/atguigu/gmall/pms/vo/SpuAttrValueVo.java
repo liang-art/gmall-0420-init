@@ -6,7 +6,7 @@ import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
-public class SpuAttrValueVo extends SpuAttrValueEntity {
+public class SpuAttrValueVo extends SpuAttrValueEntity {//继承字段，并且拓展字段
 
     private List<String> valueSelected;
 

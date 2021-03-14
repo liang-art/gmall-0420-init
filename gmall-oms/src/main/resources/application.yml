@@ -1,0 +1,47 @@
+server:
+  port: 18085
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+  zipkin:
+    base-url: http://localhost:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.211.130:3306/guli_oms
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.211.130
+  rabbitmq:
+    host: 192.168.211.130
+    virtual-host: liang
+    username: jian
+    password: 123456
+    listener:
+      simple:
+        prefetch: 1 #能者多劳
+        acknowledge-mode: manual  #手动确认
+        concurrency: 3  #多线程消费
+    publisher-confirm-type: correlated  #生产者确认
+    publisher-returns: true  #生产者确认
+feign:
+  sentinel:
+    enabled: true
+mybatis-plus:
+  mapper-locations: classpath:mapper/oms/**/*.xml
+  type-aliases-package: com.atguigu.gmall.oms.entity
+  global-config:
+    db-config:
+      id-type: auto

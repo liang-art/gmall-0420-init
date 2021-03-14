@@ -8,9 +8,10 @@ import com.atguigu.gmall.pms.service.*;
 import com.atguigu.gmall.pms.vo.SkuVo;
 import com.atguigu.gmall.pms.vo.SpuAttrValueVo;
 import com.atguigu.gmall.pms.vo.SpuVo;
-import com.atguigu.gmall.sms.feign.vo.SkuSaleVo;
+import com.atguigu.gmall.sms.vo.SkuSaleVo;
 import io.seata.spring.annotation.GlobalTransactional;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,6 @@ import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
 
 import com.atguigu.gmall.pms.mapper.SpuMapper;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 
 
@@ -51,6 +51,8 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
     @Autowired
     private GmallSmsClient smsClient;
 
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
     @Override
     public PageResultVo queryPage(PageParamVo paramVo) {
         IPage<SpuEntity> page = this.page(
@@ -169,8 +171,10 @@ public class SpuServiceImpl extends ServiceImpl<SpuMapper, SpuEntity> implements
             BeanUtils.copyProperties(skuVo, skuSaleVo);
             skuSaleVo.setSkuId(skuId);
             this.smsClient.saveSkuSalesVo(skuSaleVo);
-            int i = 10/0;
+//            int i = 10/0;
         });
+
+        rabbitTemplate.convertAndSend("SEARCH-EXCHANGE","search.save",spuId);
     }
 
 }

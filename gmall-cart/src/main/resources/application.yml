@@ -1,0 +1,70 @@
+server:
+  port: 18090
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719
+  zipkin:
+    base-url: http://localhost:9411
+    discovery-client-enabled: false
+    sender:
+      type: web
+  sleuth:
+    sampler:
+      probability: 1
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://192.168.211.130:3306/guli_cart
+    username: root
+    password: 123456
+  redis:
+    host: 192.168.211.130
+  application:
+    name: cart-service
+  rabbitmq:
+    host: 192.168.211.130
+    virtual-host: liang
+    username: jian
+    password: 123456
+    listener:
+      simple:
+        prefetch: 1  #能者多劳模式
+        concurrency: 3 #多线程消费模式
+  thymeleaf:
+    cache: false
+    #给异步任务的线程相关配置
+  task:
+    execution:
+      thread-name-prefix: cart-task-  #线程名前缀
+      pool:
+        core-size: 50 #核心线程数
+        keep-alive: 60s #存活时间
+        max-size: 1000 #最大线程数
+        allow-core-thread-timeout: true  #
+        queue-capacity: 1000  #最大可扩展数
+      shutdown:
+        await-termination: true  #关闭服务器是等待线程执行结束
+        await-termination-period: 60  #等待时间60s
+feign:
+  sentinel:
+    enabled: true
+#mybatis-plus:
+#  mapper-locations: classpath:mapper/cart/*.xml
+#  type-aliases-package: com.atguigu.gmall.cart.pojo
+  global-config:
+    db-config:
+      id-type: auto
+logging:
+  level:
+    com.atguigu.gmall: debug
+auth:
+  jwt:
+    pubKeyPath: D:\AtGuiGuNeiNet\峰哥主讲2\rsa\rsa.pub
+    expire: 15552000
+    cookieName: GMALL-TOKEN
+    userKey: user-key

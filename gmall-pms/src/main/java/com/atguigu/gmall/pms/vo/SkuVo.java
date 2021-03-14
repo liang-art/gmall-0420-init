@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Data
-public class SkuVo extends SkuEntity {
+public class SkuVo extends SkuEntity {//继承字段且拓展字段
 
     // 积分相关字段
     private BigDecimal growBounds;

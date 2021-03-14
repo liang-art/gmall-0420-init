@@ -1,5 +1,6 @@
 package com.atguigu.gmall.pms.service;
 
+import com.atguigu.gmall.pms.entity.SkuAttrValueEntity;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.atguigu.gmall.common.bean.PageResultVo;
 import com.atguigu.gmall.common.bean.PageParamVo;
@@ -20,5 +21,6 @@ public interface AttrService extends IService<AttrEntity> {
     PageResultVo queryPage(PageParamVo paramVo);
 
     List<AttrEntity> queryAttrByCid(Long cid, Integer type, Integer searchType);
+
 }
 

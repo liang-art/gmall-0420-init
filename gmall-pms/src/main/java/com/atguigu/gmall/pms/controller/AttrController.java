@@ -2,6 +2,7 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.entity.SkuAttrValueEntity;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -34,6 +35,8 @@ public class AttrController {
 
     @Autowired
     private AttrService attrService;
+
+
 
     //http://api.gmall.com/pms/attr/category/225?type=0
     @GetMapping("category/{cid}")

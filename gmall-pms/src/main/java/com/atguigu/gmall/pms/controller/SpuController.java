@@ -2,9 +2,11 @@ package com.atguigu.gmall.pms.controller;
 
 import java.util.List;
 
+import com.atguigu.gmall.pms.config.RabbitMQConfig;
 import com.atguigu.gmall.pms.vo.SpuVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -33,6 +35,9 @@ public class SpuController {
 
     @Autowired
     private SpuService spuService;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
     //http://api.gmall.com/pms/spu/category/0?t=1600774307011&pageNum=1&pageSize=10&key=
     //分页查询 商品集合单元
     //根据分类信息查询商品信息
@@ -52,6 +57,13 @@ public class SpuController {
         PageResultVo pageResultVo = spuService.queryPage(paramVo);
 
         return ResponseVo.ok(pageResultVo);
+    }
+
+    @ApiOperation("分页查询")
+    @PostMapping("search")
+    public ResponseVo<List<SpuEntity>> searchSpuByPage(@RequestBody PageParamVo paramVo){
+        PageResultVo pageResultVo = spuService.queryPage(paramVo);
+        return ResponseVo.ok((List<SpuEntity>)pageResultVo.getList());
     }
 
 
@@ -84,7 +96,7 @@ public class SpuController {
     @ApiOperation("修改")
     public ResponseVo update(@RequestBody SpuEntity spu){
 		spuService.updateById(spu);
-
+        this.rabbitTemplate.convertAndSend("PRICE_EXCHANGE","update.price",spu.getId());
         return ResponseVo.ok();
     }
 

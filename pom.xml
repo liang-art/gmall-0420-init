@@ -23,6 +23,18 @@
         <module>gmall-wms</module>
         <module>gmall-gateway</module>
         <module>gmall-sms-interface</module>
+        <module>gmall-search</module>
+        <module>gmall-pms-interface</module>
+        <module>gmall-wms-interface</module>
+        <module>gmall-index</module>
+        <module>gmall-item</module>
+        <module>gmall-ums-interface</module>
+        <module>gmall-auth</module>
+        <module>gmall-cart</module>
+        <module>gmall-cart-interface</module>
+        <module>gmall-order</module>
+        <module>gmall-oms-interface</module>
+        <module>gmall-payment</module>
     </modules>
     <name>gmall-0420</name>
     <description>谷粒商城父工程</description>
@@ -35,7 +47,7 @@
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <mybatisplus.version>3.3.1.tmp</mybatisplus.version>
         <mysql.version>5.1.46</mysql.version>
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>2.7.0</swagger.version>
         <lombok.version>1.18.8</lombok.version>
         <jjwt.version>0.11.0</jjwt.version>
         <joda.version>2.10.5</joda.version>

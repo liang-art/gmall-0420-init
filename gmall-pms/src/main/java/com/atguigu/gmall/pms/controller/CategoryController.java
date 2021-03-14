@@ -34,6 +34,19 @@ public class CategoryController {
 
     @Autowired
     private CategoryService categoryService;
+
+    @GetMapping("all/{cid3}")
+    public ResponseVo<List<CategoryEntity>> queryAllCategoriesByCid3(@PathVariable("cid3")Long cid3){
+        List<CategoryEntity> categoryEntities = categoryService.queryAllCategoriesByCid3(cid3);
+        return ResponseVo.ok(categoryEntities);
+    }
+
+    @GetMapping("parent/sub/{pid}")
+    @ApiOperation("查询二级和三级分类信息")
+    public  ResponseVo<List<CategoryEntity>> queryLel2Catagory(@PathVariable("pid") Long pid){
+        List<CategoryEntity> categoryEntities = categoryService.queryLel2Catagory(pid);
+        return ResponseVo.ok(categoryEntities);
+    }
     //分类信息查询
     // 自关联表
     @ApiOperation("根据父parentId查询分类信息")

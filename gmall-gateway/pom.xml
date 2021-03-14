@@ -12,6 +12,18 @@
     <artifactId>gmall-gateway</artifactId>
 
     <dependencies>
+
+        <dependency>
+            <groupId>com.atguigu.gmall</groupId>
+            <artifactId>gmall-common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.tomcat.embed</groupId>
+                    <artifactId>tomcat-embed-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         <!--文件上传-->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
